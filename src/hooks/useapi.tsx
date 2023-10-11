@@ -28,6 +28,7 @@ export interface DetailsResult {
   Director: string;
   Actors: string;
   Website: string;
+  Awards: string;
 }
 
 export const useApi = () => {
@@ -45,7 +46,7 @@ export const useApi = () => {
   };
 
   const getDetails = async (id: string): Promise<DetailsResult> => {
-    const result = await fetch(`${url}?i=${id}plot=full&apikey=${apiKey}`);
+    const result = await fetch(`${url}?i=${id}&plot=full&apikey=${apiKey}`);
     return result.json();
   };
 
