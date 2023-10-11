@@ -1,5 +1,3 @@
-import { Helmet } from "react-helmet";
-import ExploreContainer from "../components/ExploreContainer";
 import {
   IonAvatar,
   IonContent,
@@ -79,7 +77,11 @@ const Home: React.FC = () => {
 
         <IonList>
           {results.map((item: SearchResult) => (
-            <IonItem button key={item.imdbID}>
+            <IonItem
+              button
+              key={item.imdbID}
+              routerLink={`/movies/${item.imdbID}`}
+            >
               <IonAvatar slot="start">
                 <IonImg src={item.Poster} />
               </IonAvatar>
