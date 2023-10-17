@@ -1,13 +1,11 @@
 import {
   IonAvatar,
-  IonContent,
   IonHeader,
   IonIcon,
   IonImg,
   IonItem,
   IonLabel,
   IonList,
-  IonPage,
   IonSearchbar,
   IonSelect,
   IonSelectOption,
@@ -23,6 +21,11 @@ import {
   tvOutline,
   videocamOutline,
 } from "ionicons/icons";
+import IonPageComponent from "../components/IonPageComponent";
+import styled from "styled-components";
+
+const Wrapper = styled.div`
+`;
 
 const Home: React.FC = () => {
   const { searchData } = useApi();
@@ -53,13 +56,13 @@ const Home: React.FC = () => {
   }, [searchTerm, type]);
 
   return (
-    <IonPage>
+    <IonPageComponent>
       <IonHeader>
         <IonToolbar color={"primary"}>
           <IonTitle>Movie Application</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent>
+      <Wrapper>
         <IonSearchbar
           value={searchTerm}
           debounce={300}
@@ -98,8 +101,8 @@ const Home: React.FC = () => {
             </IonItem>
           ))}
         </IonList>
-      </IonContent>
-    </IonPage>
+      </Wrapper>
+    </IonPageComponent>
     /*  <>
       <Helmet>
         <title>Home</title>
