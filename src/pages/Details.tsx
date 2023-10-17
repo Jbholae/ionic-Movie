@@ -7,7 +7,6 @@ import {
   IonCardHeader,
   IonCardSubtitle,
   IonCardTitle,
-  IonContent,
   IonFooter,
   IonHeader,
   IonIcon,
@@ -15,7 +14,6 @@ import {
   IonItem,
   IonLabel,
   IonModal,
-  IonPage,
   IonTitle,
   IonToolbar,
   useIonViewWillEnter,
@@ -29,7 +27,29 @@ import {
   starHalfOutline,
   trophyOutline,
 } from "ionicons/icons";
+import IonPageComponent from "../components/IonPageComponent";
+import styled from "styled-components";
 
+const Wrapper = styled.div``;
+const IonModalComponent = styled(IonModal)`
+  --width: 14px;
+  --border-radius: 10px;
+  border: 1px solid blue;
+
+  .modal-body {
+    width: "335px";
+    height: auto;
+    margin: 20px auto;
+    border-radius: 50px;
+    padding: 34px 0;
+    border: "1px solid red",
+
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+`;
 interface DetailsPageProps extends RouteComponentProps<{ id: string }> {}
 
 const Details: React.FC<DetailsPageProps> = ({ match }) => {
@@ -41,9 +61,42 @@ const Details: React.FC<DetailsPageProps> = ({ match }) => {
     console.log(data, "this is data");
     setInformation(data);
   });
-  console.log(information, "information");
   return (
-    <IonPage>
+    <IonPageComponent>
+      <IonModalComponent
+        isOpen={true}
+        // trigger="open-modal"
+        handleBehavior="cycle"
+        initialBreakpoint={0.25}
+        breakpoints={[0, 2.5, 0.5, 0.75]}
+      >
+        <Wrapper
+          className="ion-padding modal-body"
+          /* style={{
+              width: "95%",
+              margin: "20px auto",
+              border: "1px solid red",
+            }} */
+        >
+          <IonItem lines="none">
+            <IonIcon icon={clipboardOutline} slot="start" />
+            <IonLabel>{information?.Director}</IonLabel>
+          </IonItem>
+
+          <IonItem lines="none">
+            <IonIcon icon={bodyOutline} slot="start" />
+            <IonLabel className="ion-text-wrap">{information?.Actors}</IonLabel>
+          </IonItem>
+
+          <IonItem lines="none">
+            <IonIcon icon={trophyOutline} slot="start" />
+            <IonLabel className="ion-text-warp">{information?.Awards}</IonLabel>
+          </IonItem>
+          <p className="ion-padding" style={{ padding: 20 }}>
+            {information?.Plot}
+          </p>
+        </Wrapper>
+      </IonModalComponent>
       <IonHeader>
         <IonToolbar>
           <IonButtons slot="start">
@@ -52,7 +105,7 @@ const Details: React.FC<DetailsPageProps> = ({ match }) => {
           <IonTitle>{information?.Genre}</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent>
+      <Wrapper>
         {information && (
           <IonCard>
             <IonCardHeader>
@@ -69,43 +122,13 @@ const Details: React.FC<DetailsPageProps> = ({ match }) => {
             </IonCardContent>
           </IonCard>
         )}
-
-        <IonModal
-          trigger="open-modal"
-          initialBreakpoint={0.25}
-          breakpoints={[0, 2.5, 0.5, 0.75]}
-        >
-          <IonContent className="ion-padding">
-
-            <IonItem lines="none">
-              <IonIcon icon={clipboardOutline} slot="start" />
-              <IonLabel>{information?.Director}</IonLabel>
-            </IonItem>
-
-            <IonItem lines="none">
-              <IonIcon icon={bodyOutline} slot="start" />
-              <IonLabel className="ion-text-wrap">
-                {information?.Actors}
-              </IonLabel>
-            </IonItem>
-            
-            <IonItem lines="none">
-              <IonIcon icon={trophyOutline} slot="start" />
-              <IonLabel className="ion-text-warp">
-                {information?.Awards}
-              </IonLabel>
-            </IonItem>
-
-            <p className="ion-padding">{information?.Plot}</p>
-          </IonContent>
-        </IonModal>
-      </IonContent>
+      </Wrapper>
       <IonFooter>
         <IonButton expand="full" id="open-modal">
           Show more
         </IonButton>
       </IonFooter>
-    </IonPage>
+    </IonPageComponent>
   );
 };
 
