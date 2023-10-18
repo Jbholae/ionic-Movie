@@ -3,17 +3,16 @@ import styled from "styled-components";
 
 const Wrapper = styled.div`
   max-width: 414px;
-  border: 1px solid red;
   margin: auto;
   position: relative;
   min-height: 100vh;
 
-  background-color:'var(--ion-color-primary)
+  background-color: white;
   /* background: linear-gradient(
-      0deg,
-      rgba(255, 255, 255, 0.79) 0%,
-      rgba(255, 255, 255, 0.79) 100%
-    ) */
+    0deg,
+    rgba(255, 255, 255, 0.79) 0%,
+    rgba(255, 255, 255, 0.79) 100%
+  ); */
   @media (max-width: 414px) {
     min-width: 100%;
   }
@@ -22,7 +21,7 @@ const Wrapper = styled.div`
 const Content = styled(IonContent)`
   width: 100vw;
   overflow: auto;
-  --ion-background-color: white;
+  --ion-background-color: grey;
 `;
 
 const IonPageComponent = ({ children }: any) => {
