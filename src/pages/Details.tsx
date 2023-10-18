@@ -32,22 +32,12 @@ import styled from "styled-components";
 
 const Wrapper = styled.div``;
 const IonModalComponent = styled(IonModal)`
-  --width: 14px;
+  --width: 414px;
   --border-radius: 10px;
-  border: 1px solid blue;
 
   .modal-body {
-    width: "335px";
-    height: auto;
-    margin: 20px auto;
-    border-radius: 50px;
-    padding: 34px 0;
-    border: "1px solid red",
-
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    width: 335px;
+    padding: 34px 20px;
   }
 `;
 interface DetailsPageProps extends RouteComponentProps<{ id: string }> {}
@@ -64,31 +54,23 @@ const Details: React.FC<DetailsPageProps> = ({ match }) => {
   return (
     <IonPageComponent>
       <IonModalComponent
-        isOpen={true}
-        // trigger="open-modal"
+        trigger="open-modal"
         handleBehavior="cycle"
         initialBreakpoint={0.25}
         breakpoints={[0, 2.5, 0.5, 0.75]}
       >
-        <Wrapper
-          className="ion-padding modal-body"
-          /* style={{
-              width: "95%",
-              margin: "20px auto",
-              border: "1px solid red",
-            }} */
-        >
-          <IonItem lines="none">
+        <Wrapper className="ion-padding modal-body">
+          <IonItem lines="none" slot="header">
             <IonIcon icon={clipboardOutline} slot="start" />
             <IonLabel>{information?.Director}</IonLabel>
           </IonItem>
 
-          <IonItem lines="none">
+          <IonItem lines="none" slot="header">
             <IonIcon icon={bodyOutline} slot="start" />
             <IonLabel className="ion-text-wrap">{information?.Actors}</IonLabel>
           </IonItem>
 
-          <IonItem lines="none">
+          <IonItem lines="none" slot="header">
             <IonIcon icon={trophyOutline} slot="start" />
             <IonLabel className="ion-text-warp">{information?.Awards}</IonLabel>
           </IonItem>
