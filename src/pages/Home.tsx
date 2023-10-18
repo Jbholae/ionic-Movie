@@ -24,8 +24,7 @@ import {
 import IonPageComponent from "../components/IonPageComponent";
 import styled from "styled-components";
 
-const Wrapper = styled.div`
-`;
+const Wrapper = styled.div``;
 
 const Home: React.FC = () => {
   const { searchData } = useApi();
@@ -103,12 +102,6 @@ const Home: React.FC = () => {
         </IonList>
       </Wrapper>
     </IonPageComponent>
-    /*  <>
-      <Helmet>
-        <title>Home</title>
-      </Helmet>
-      <ExploreContainer />
-    </> */
   );
 };
 
