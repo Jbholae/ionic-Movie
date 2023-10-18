@@ -24,7 +24,17 @@ import {
 import IonPageComponent from "../components/IonPageComponent";
 import styled from "styled-components";
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  .searchbar-input {
+    background-color: white;
+  }
+  ion-item {
+    --background: white;
+  }
+  ion-list {
+    --background: white;
+  }
+`;
 
 const Home: React.FC = () => {
   const { searchData } = useApi();
@@ -56,7 +66,7 @@ const Home: React.FC = () => {
 
   return (
     <IonPageComponent>
-      <IonHeader>
+      <IonHeader style={{ position: "sticky", top: 0 }}>
         <IonToolbar color={"primary"}>
           <IonTitle>Movie Application</IonTitle>
         </IonToolbar>

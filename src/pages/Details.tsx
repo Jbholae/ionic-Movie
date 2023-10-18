@@ -30,7 +30,11 @@ import {
 import IonPageComponent from "../components/IonPageComponent";
 import styled from "styled-components";
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  ion-card {
+    --background: white;
+  }
+`;
 const IonModalComponent = styled(IonModal)`
   --width: 414px;
   --border-radius: 10px;
@@ -79,7 +83,7 @@ const Details: React.FC<DetailsPageProps> = ({ match }) => {
           </p>
         </Wrapper>
       </IonModalComponent>
-      <IonHeader>
+      <IonHeader style={{ position: "sticky", top: 0 }}>
         <IonToolbar>
           <IonButtons slot="start">
             <IonBackButton defaultHref="/movies"></IonBackButton>
