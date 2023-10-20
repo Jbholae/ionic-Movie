@@ -14,3 +14,9 @@ export const fetchComment = ({queryKey} : QueryFunctionContext)  => {
     const id = queryKey[1];
     return API.get(`/posts/${id}/comments`);
 }
+
+export const createPost=(payload : QueryFunctionContext) => {
+    const data = payload;
+    return API.post(`/posts`,data)
+    
+}
