@@ -1,6 +1,7 @@
 import {
   IonIcon,
   IonLabel,
+  IonPage,
   IonRouterOutlet,
   IonTabBar,
   IonTabButton,
@@ -10,36 +11,74 @@ import IonPageComponent from "../components/IonPageComponent";
 import Home from "./Home";
 import Socials from "./Social";
 import { Redirect, Route } from "react-router-dom";
-import { camera, logoAndroid } from "ionicons/icons";
+import { camera, logoAndroid, playCircle, radio } from "ionicons/icons";
+import { IonReactRouter } from "@ionic/react-router";
+import styled from "styled-components";
 import Details from "./Details";
-
-
+const Wrapper = styled.div`
+  ion-tab-bar {
+    color: blue;
+  }
+`;
 
 const Tabs = () => {
   return (
     <IonPageComponent>
-      <IonTabs>
-        <IonRouterOutlet>
-          <Route path="/movies" component={Home} />
-          <Route path="/movies/:id" component={Details} />
-          <Route path="/socials" component={Socials} />
-          <Route exact path="/">
-            <Redirect to="/tabs/movies" />
-          </Route>
-        </IonRouterOutlet>
+      {/* <Wrapper>
+        <IonReactRouter>
+          <IonTabs>
+            <IonRouterOutlet>
+              <Redirect exact path="/" to="/tabs" />
+            </IonRouterOutlet>
 
-        <IonTabBar slot="bottom">
-          <IonTabButton tab="movies" href="/movies">
-            <IonIcon icon={camera}></IonIcon>
-            <IonLabel>Movies</IonLabel>
-          </IonTabButton>
+            <IonTabBar slot="bottom">
+              <IonTabButton tab="home" href="/movies">
+                <IonIcon icon={playCircle} />
+                <IonLabel>Listen now</IonLabel>
+              </IonTabButton>
 
-          <IonTabButton tab="socials" href="/socials">
-            <IonIcon icon={logoAndroid}></IonIcon>
-            <IonLabel>Socials</IonLabel>
-          </IonTabButton>
-        </IonTabBar>
-      </IonTabs>
+              <IonTabButton tab="radio" href="/socials">
+                <IonIcon icon={radio} />
+                <IonLabel>Radio</IonLabel>
+              </IonTabButton>
+            </IonTabBar>
+          </IonTabs>
+        </IonReactRouter>
+      </Wrapper> */}
+      <IonReactRouter>
+        <IonTabs>
+          <IonRouterOutlet>
+            <Route
+              path="/movies"
+              render={() => <Home />}
+              component={Home}
+              exact={true}
+            />
+            <Route path="/movies/:id" component={Details} />
+            <Route
+              path="/socials"
+              render={() => <Socials />}
+              component={Socials}
+              exact={true}
+            />
+            <Route exact path="/">
+              <Redirect to="/tabs" />
+            </Route>
+          </IonRouterOutlet>
+
+          <IonTabBar slot="bottom">
+            <IonTabButton tab="movies" href="/movies">
+              <IonIcon icon={camera}></IonIcon>
+              <IonLabel>Movies</IonLabel>
+            </IonTabButton>
+
+            <IonTabButton tab="socials" href="/socials">
+              <IonIcon icon={logoAndroid}></IonIcon>
+              <IonLabel>Socials</IonLabel>
+            </IonTabButton>
+          </IonTabBar>
+        </IonTabs>
+      </IonReactRouter>
     </IonPageComponent>
   );
 };
