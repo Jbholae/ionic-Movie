@@ -26,6 +26,7 @@ import IonPageComponent from "../components/IonPageComponent";
 import styled from "styled-components";
 import { useQuery } from "react-query";
 import { fetchMovies } from "../hooks/movies";
+import { Spin } from "antd";
 
 const Wrapper = styled.div`
   .searchbar-input {
@@ -34,7 +35,6 @@ const Wrapper = styled.div`
   ion-item {
     --background: white;
   }
-  
   ion-list {
     --background: white;
   }
@@ -79,6 +79,13 @@ const Home: React.FC = () => {
     loadData();
   }, [searchTerm, type]); */
 
+  if (isLoading || isFetching) {
+    <div>
+      <Spin />
+    </div>;
+  }
+
+
   return (
     <IonPageComponent>
       <IonHeader style={{ position: "sticky", top: 0 }}>
@@ -109,36 +116,31 @@ const Home: React.FC = () => {
             <IonSelectOption value="episode">Episode</IonSelectOption>
           </IonSelect>
         </IonItem>
-        {isFetching ? (
-          loading
-        ) : isLoading ? (
-          loading
-        ) : (
-          <IonList>
-            {searchData &&
-              searchData?.data?.Search?.map((item: SearchResult) => (
-                <IonItem
-                  button
-                  key={item.imdbID}
-                  routerLink={`/movies/${item.imdbID}`}
-                >
-                  <IonAvatar slot="start">
-                    <IonImg src={item.Poster} />
-                  </IonAvatar>
-                  <IonLabel className="ion-text-wrap">{item.Title}</IonLabel>
-                  {item.Type === "movie" && (
-                    <IonIcon slot="end" icon={videocamOutline} />
-                  )}
-                  {item.Type === "series" && (
-                    <IonIcon slot="end" icon={tvOutline} />
-                  )}
-                  {item.Type === "game" && (
-                    <IonIcon slot="end" icon={gameControllerOutline} />
-                  )}
-                </IonItem>
-              ))}
-          </IonList>
-        )}
+
+        <IonList>
+          {searchData &&
+            searchData?.data?.Search?.map((item: SearchResult) => (
+              <IonItem
+                button
+                key={item.imdbID}
+                routerLink={`/movies/${item.imdbID}`}
+              >
+                <IonAvatar slot="start">
+                  <IonImg src={item.Poster} />
+                </IonAvatar>
+                <IonLabel className="ion-text-wrap">{item.Title}</IonLabel>
+                {item.Type === "movie" && (
+                  <IonIcon slot="end" icon={videocamOutline} />
+                )}
+                {item.Type === "series" && (
+                  <IonIcon slot="end" icon={tvOutline} />
+                )}
+                {item.Type === "game" && (
+                  <IonIcon slot="end" icon={gameControllerOutline} />
+                )}
+              </IonItem>
+            ))}
+        </IonList>
       </Wrapper>
     </IonPageComponent>
   );
