@@ -1,5 +1,6 @@
-import { IonContent, IonPage } from "@ionic/react";
+import { IonContent, IonFooter, IonPage } from "@ionic/react";
 import styled from "styled-components";
+import FooterComponent from "./FooterComponent";
 
 const Wrapper = styled.div`
   max-width: 414px;
@@ -7,12 +8,12 @@ const Wrapper = styled.div`
   position: relative;
   min-height: 100vh;
 
-  background-color: white;
-  /* background: linear-gradient(
+  // background-color: white;
+  background: linear-gradient(
     0deg,
     rgba(255, 255, 255, 0.79) 0%,
     rgba(255, 255, 255, 0.79) 100%
-  ); */
+  );
   @media (max-width: 414px) {
     min-width: 100%;
   }
@@ -28,7 +29,12 @@ const IonPageComponent = ({ children }: any) => {
   return (
     <IonPage>
       <Content>
-        <Wrapper>{children}</Wrapper>
+        <Wrapper>
+          {children}
+          <IonFooter>
+            <FooterComponent />
+          </IonFooter>
+        </Wrapper>
       </Content>
     </IonPage>
   );
