@@ -1,7 +1,6 @@
 import {
   IonIcon,
   IonLabel,
-  IonPage,
   IonRouterOutlet,
   IonTabBar,
   IonTabButton,
@@ -9,10 +8,9 @@ import {
 } from "@ionic/react";
 import IonPageComponent from "../components/IonPageComponent";
 import Home from "./Home";
-import Socials from "./Social";
+import Socials from "./Socials";
 import { Redirect, Route } from "react-router-dom";
-import { camera, logoAndroid, playCircle, radio } from "ionicons/icons";
-import { IonReactRouter } from "@ionic/react-router";
+import { camera, logoAndroid } from "ionicons/icons";
 import styled from "styled-components";
 import Details from "./Details";
 const Wrapper = styled.div`
@@ -23,8 +21,31 @@ const Wrapper = styled.div`
 
 const Tabs = () => {
   return (
-    <IonPageComponent>
-      {/* <Wrapper>
+    <Wrapper>
+      <IonPageComponent>
+        <IonTabs>
+          <IonRouterOutlet>
+            <Route exact path="/movies" component={Home} />
+            <Route exact path="/movies/:id" component={Details} />
+            <Route exact path="/socials" component={Socials} />
+            <Route exact path="/">
+              <Redirect to="/movies" />
+            </Route>
+          </IonRouterOutlet>
+
+          <IonTabBar slot="bottom">
+            <IonTabButton tab="movies" href="/movies">
+              <IonIcon icon={camera}></IonIcon>
+              <IonLabel>Movies</IonLabel>
+            </IonTabButton>
+
+            <IonTabButton tab="socials" href="/socials">
+              <IonIcon icon={logoAndroid}></IonIcon>
+              <IonLabel>Movies</IonLabel>
+            </IonTabButton>
+          </IonTabBar>
+        </IonTabs>
+        {/* <Wrapper>
         <IonReactRouter>
           <IonTabs>
             <IonRouterOutlet>
@@ -45,7 +66,7 @@ const Tabs = () => {
           </IonTabs>
         </IonReactRouter>
       </Wrapper> */}
-      <IonReactRouter>
+        {/* <IonReactRouter>
         <IonTabs>
           <IonRouterOutlet>
             <Route
@@ -78,8 +99,9 @@ const Tabs = () => {
             </IonTabButton>
           </IonTabBar>
         </IonTabs>
-      </IonReactRouter>
-    </IonPageComponent>
+      </IonReactRouter> */}
+      </IonPageComponent>
+    </Wrapper>
   );
 };
 
