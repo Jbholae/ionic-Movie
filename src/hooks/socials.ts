@@ -1,6 +1,13 @@
 import { QueryFunctionContext } from "react-query";
 import { API } from "./api"
 
+interface PostBodyProps{
+    id:string,
+    userId:string,
+    title:string,
+    body:string,
+}
+
 export const fetchPosts = () =>{
     return API.get('/posts');
 }
@@ -15,7 +22,7 @@ export const fetchComment = ({queryKey} : QueryFunctionContext)  => {
     return API.get(`/posts/${id}/comments`);
 }
 
-export const createPost=(payload : QueryFunctionContext) => {
+export const createPost=(payload : PostBodyProps) => {
     const data = payload;
     return API.post(`/posts`,data)
     
