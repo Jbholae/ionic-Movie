@@ -11,14 +11,11 @@ import {
   IonSelectOption,
   IonTitle,
   IonToolbar,
-  useIonAlert,
-  useIonLoading,
 } from "@ionic/react";
-import { useEffect, useState } from "react";
-import { SearchResult, SearchType, useApi } from "../hooks/useapi";
+import { useState } from "react";
+import { SearchResult, SearchType } from "../hooks/useapi";
 import {
   gameControllerOutline,
-  search,
   tvOutline,
   videocamOutline,
 } from "ionicons/icons";
@@ -26,9 +23,7 @@ import IonPageComponent from "../components/IonPageComponent";
 import styled from "styled-components";
 import { useQuery } from "react-query";
 import { fetchMovies } from "../hooks/movies";
-import { Spin } from "antd";
 import { Loader } from "../components/Loader";
-import FooterComponent from "../components/FooterComponent";
 import { useHistory } from "react-router-dom";
 
 const Wrapper = styled.div`
@@ -40,17 +35,33 @@ const Wrapper = styled.div`
   }
   ion-list {
     --background: white;
+    padding: 0px;
+  }
+
+  .searchbar-input {
+    background: white;
+  }
+
+  .sc-ion-searchbar-md-h
+    sc-ion-searchbar-md-s
+    md
+    searchbar-left-aligned
+    searchbar-should-show-clear {
+    background: white;
+  }
+
+  .empty-container {
+    display: flex;
+    height: 500px;
+    align-items: center;
+    justify-content: center;
   }
 `;
 
 const Home: React.FC = () => {
-  // const { searchData } = useApi();
   const history = useHistory();
   const [searchTerm, setSearchTerm] = useState("");
   const [type, setType] = useState<SearchType>(SearchType.all);
-  /* const [results, setResults] = useState<SearchResult[]>([]);
-  const [presentAlert] = useIonAlert(); */
-  const [loading, dismiss] = useIonLoading();
   const [calling, setCalling] = useState(false);
 
   const {
@@ -61,27 +72,6 @@ const Home: React.FC = () => {
     enabled: calling,
     keepPreviousData: true,
   });
-
-  /*  useEffect(() => {
-    if (searchTerm === "") {
-      setResults([]);
-      return;
-    }
-
-    const loadData = async () => {
-      await loading();
-      const result: any = await searchData(searchTerm, type);
-      await dismiss();
-      if (result?.Error) {
-        presentAlert(result.Error);
-      } else {
-        setResults(searchData);
-        // setResults(result.Search);
-      }
-      console.log("result", result);
-    };
-    loadData();
-  }, [searchTerm, type]); */
 
   return (
     <IonPageComponent>
@@ -114,30 +104,36 @@ const Home: React.FC = () => {
           </IonSelect>
         </IonItem>
         <Loader isLoading={isLoading || isFetching}>
-          <IonList>
-            {searchData &&
-              searchData?.data?.Search?.map((item: SearchResult) => (
-                <IonItem
-                  button
-                  key={item.imdbID}
-                  onClick={() => history.push(`/movies/${item.imdbID}`)}
-                >
-                  <IonAvatar slot="start">
-                    <IonImg src={item.Poster} />
-                  </IonAvatar>
-                  <IonLabel className="ion-text-wrap">{item.Title}</IonLabel>
-                  {item.Type === "movie" && (
-                    <IonIcon slot="end" icon={videocamOutline} />
-                  )}
-                  {item.Type === "series" && (
-                    <IonIcon slot="end" icon={tvOutline} />
-                  )}
-                  {item.Type === "game" && (
-                    <IonIcon slot="end" icon={gameControllerOutline} />
-                  )}
-                </IonItem>
-              ))}
-          </IonList>
+          {searchData?.data?.Search === undefined ? (
+            <div className="empty-container">
+              Type on search field to search for movies.
+            </div>
+          ) : (
+            <IonList>
+              {searchData &&
+                searchData?.data?.Search?.map((item: SearchResult) => (
+                  <IonItem
+                    button
+                    key={item.imdbID}
+                    onClick={() => history.push(`/movies/${item.imdbID}`)}
+                  >
+                    <IonAvatar slot="start">
+                      <IonImg src={item.Poster} />
+                    </IonAvatar>
+                    <IonLabel className="ion-text-wrap">{item.Title}</IonLabel>
+                    {item.Type === "movie" && (
+                      <IonIcon slot="end" icon={videocamOutline} />
+                    )}
+                    {item.Type === "series" && (
+                      <IonIcon slot="end" icon={tvOutline} />
+                    )}
+                    {item.Type === "game" && (
+                      <IonIcon slot="end" icon={gameControllerOutline} />
+                    )}
+                  </IonItem>
+                ))}
+            </IonList>
+          )}
         </Loader>
       </Wrapper>
     </IonPageComponent>
