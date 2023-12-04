@@ -8,11 +8,9 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: space-around;
   padding: 10px 10px;
-  position: sticky;
 
   div {
     display: flex;
-    justify-content: center;
     width: 50px;
     flex-direction: column;
 
