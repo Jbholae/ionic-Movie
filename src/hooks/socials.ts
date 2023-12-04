@@ -17,6 +17,10 @@ export const fetchPostDetail = ({queryKey} : QueryFunctionContext) =>{
     return API.get(`/posts/${id}`);
 }
 
+export const updatePostDetail = ({userId,payload}:any) =>{
+    return API.put(`/posts/${userId}`,payload);
+}
+
 export const fetchComment = ({queryKey} : QueryFunctionContext)  => {
     const id = queryKey[1];
     return API.get(`/posts/${id}/comments`);
