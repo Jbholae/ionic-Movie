@@ -1,4 +1,4 @@
-import { IonContent, IonFooter, IonPage } from "@ionic/react";
+import { IonContent, IonPage } from "@ionic/react";
 import styled from "styled-components";
 import FooterComponent from "./FooterComponent";
 
@@ -8,7 +8,14 @@ const Wrapper = styled.div`
   position: relative;
   min-height: 100vh;
 
-  // background-color: white;
+  .footer-wrapper {
+    position: sticky;
+    top: 500px;
+    bottom: 20px !important;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.9);
+  }
+
   background: linear-gradient(
     0deg,
     rgba(255, 255, 255, 0.79) 0%,
@@ -22,7 +29,11 @@ const Wrapper = styled.div`
 const Content = styled(IonContent)`
   width: 100vw;
   overflow: auto;
-  --ion-background-color: grey;
+  --ion-background-color: linear-gradient(
+    0deg,
+    rgba(189, 195, 199, 0.79) 0%,
+    rgba(44, 62, 80, 0.79) 100%
+  );
 `;
 
 const IonPageComponent = ({ children }: any) => {
@@ -31,9 +42,9 @@ const IonPageComponent = ({ children }: any) => {
       <Content>
         <Wrapper>
           {children}
-          <IonFooter>
+          <div className="footer-wrapper">
             <FooterComponent />
-          </IonFooter>
+          </div>
         </Wrapper>
       </Content>
     </IonPage>
