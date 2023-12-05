@@ -52,9 +52,9 @@ const Wrapper = styled.div`
 
   .empty-container {
     display: flex;
-    height: 500px;
     align-items: center;
     justify-content: center;
+    height: 76vh;
   }
 `;
 
