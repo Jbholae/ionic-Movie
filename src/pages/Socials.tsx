@@ -84,7 +84,7 @@ const Socials = () => {
   const [detaiModalOpen, setDetailModalOpen] = useState<boolean>(false);
   const [toast, isToastOpen] = useState<boolean>(false);
   const [toastMessage, setToastMessage] = useState<string>("");
-  const [postId, setPostId] = useState<number>(0);
+  const [postId, setPostId] = useState<number>();
   const [getFormDetails, setDetailFormDetails] = useState({
     title: "",
     body: "",
@@ -123,6 +123,7 @@ const Socials = () => {
     {
       refetchOnWindowFocus: false,
       keepPreviousData: false,
+      enabled: postId ? true : false,
       onSuccess(data) {
         const res = data?.data;
         setDetailFormDetails((prevState: any) => {
@@ -145,30 +146,30 @@ const Socials = () => {
   }
 
   const { mutate, isLoading: postingData } = useMutation(createPost, {
-    onSuccess: async (e: any) => {
-      isToastOpen(true);
+    onSuccess: async () => {
       setToastMessage("Success");
+      isToastOpen(true);
       refetch();
       modalDismiss();
     },
-    onError: (e: any) => {
-      isToastOpen(true);
+    onError: () => {
       setToastMessage("Failed");
+      isToastOpen(true);
     },
   });
 
   const { mutate: mutateUpdatePost, isLoading: updaingPost } = useMutation(
     updatePostDetail,
     {
-      onSuccess: async (e: any) => {
-        isToastOpen(true);
+      onSuccess: async () => {
         setToastMessage("Success");
+        isToastOpen(true);
         refetch();
         detailModalDismiss();
       },
-      onError: (e: any) => {
-        isToastOpen(true);
+      onError: () => {
         setToastMessage("Failed");
+        isToastOpen(true);
       },
     }
   );
@@ -184,8 +185,7 @@ const Socials = () => {
 
   const updatePost = async () => {
     mutateUpdatePost({
-      userId: 1,
-      // userId: `${socialData?.data?.id}.toString()`,
+      userId: `${socialData?.data[0].id}`,
       payload: {
         id: postId,
         userId: socialData?.data?.id,
