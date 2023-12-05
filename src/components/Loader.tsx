@@ -9,6 +9,7 @@ interface ILoaderProps {
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
+  align-items: center;
 `;
 
 const Loader: React.FC<ILoaderProps> = ({ children, isLoading, className }) => {
