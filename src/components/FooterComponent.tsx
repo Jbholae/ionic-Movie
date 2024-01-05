@@ -40,6 +40,10 @@ const FooterComponent = () => {
         <IonIcon icon={people} />
         <IonLabel>Socials</IonLabel>
       </div>
+      <div onClick={() => push("/Profile")}>
+        <IonIcon icon={people} />
+        <IonLabel>Profile</IonLabel>
+      </div>
     </Wrapper>
   );
 };

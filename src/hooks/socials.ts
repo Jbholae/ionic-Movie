@@ -8,6 +8,15 @@ interface PostBodyProps{
     body:string,
 }
 
+export const fetchPhoto = ({queryKey}:QueryFunctionContext) =>{
+    const id = queryKey[1];
+    return API.get(`/photos/${id}`)
+}
+export const updatePhoto = ({id,data}:any) =>{
+    
+    return API.put(`/photos/${id}`,data)
+}
+
 export const fetchPosts = () =>{
     return API.get('/posts');
 }

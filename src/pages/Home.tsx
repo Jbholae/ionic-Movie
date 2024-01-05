@@ -70,7 +70,7 @@ const Home: React.FC = () => {
     data: searchData,
   } = useQuery(["movies", searchTerm, type], fetchMovies, {
     enabled: calling,
-    keepPreviousData: true,
+    keepPreviousData: false,
   });
 
   return (
