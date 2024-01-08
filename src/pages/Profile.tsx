@@ -69,7 +69,8 @@ const Wrapper = styled.div`
 
 const Profile = () => {
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState<string>("");
+  const [cropimage, setCropImage] = useState<string>("");
   const [imgErr, setImgErr] = useState<string>("");
   // const [isImgUploading, setIsImgUploading] = useState<boolean>(false);
   // const [showToast, setShowToast] = useToast(false);
@@ -112,6 +113,10 @@ const Profile = () => {
   };
 
   const handleImageUpload = (file: File, croppedImage: any) => {
+    setImage(croppedImage);
+    setCropImage(croppedImage);
+    closeModal();
+
     /* if (userProfileData?.id) {
       setIsImgUploading(true);
       // api to get image
@@ -176,7 +181,9 @@ const Profile = () => {
       <Wrapper>
         <div className="profile-image">
           <div className="avatar">
-            <IonImg src={image ? image : "./assets/avatar/user-avatar.png"} />
+            <IonImg
+              src={cropimage ? cropimage : "./assets/avatar/user-avatar.png"}
+            />
           </div>
           <div className="add-button">
             <ImageUpload
@@ -189,8 +196,6 @@ const Profile = () => {
           </div>
         </div>
         {imgErr && <IonText className="err-msg">{imgErr}</IonText>}
-        {/* </IonCol> */}
-        {/* </IonRow> */}
       </Wrapper>
     </IonPageComponent>
   );
