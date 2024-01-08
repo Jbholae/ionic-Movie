@@ -9,7 +9,7 @@ const Wrapper = styled.div`
   height: 100vh;
 
   .footer-wrapper {
-    width: 21.6vw;
+    width: 414px;
     position: fixed;
     bottom: 0px;
     z-index: 100;
