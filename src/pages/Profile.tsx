@@ -23,10 +23,14 @@ const Wrapper = styled.div`
     top: 110px;
   }
 
-  .avatar {
+  .avatar,
+  ion-img {
     height: 77px;
     width: 77px;
     margin-bottom: 0.5rem;
+    overflow: hidden;
+    object-fit: cover;
+    border-radius: 50%;
   }
 
   .profile-image {
